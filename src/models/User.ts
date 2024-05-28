@@ -18,8 +18,8 @@ const MessageSchema: Schema<Message> = new Schema({
     },
 });
 
-const MessageModel = (mongoose.models.Message as mongoose.Model<Message>) ||
-    mongoose.model<Message>('Message', MessageSchema);
+// const MessageModel = (mongoose.models.Message as mongoose.Model<Message>) ||
+//     mongoose.model<Message>('Message', MessageSchema);
 
 // Define the User interface and schema
 export interface User extends Document {
@@ -30,7 +30,8 @@ export interface User extends Document {
     verifyCodeExpiry: Date;
     isVerified: boolean;
     isAcceptingMessages: boolean;
-    messages: Types.ObjectId[];
+    // messages: Types.ObjectId[];
+    messages: Message[];
 }
 
 const UserSchema: Schema<User> = new Schema({
@@ -66,13 +67,20 @@ const UserSchema: Schema<User> = new Schema({
         type: Boolean,
         default: true,
     },
-    messages: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Message',
-    }],
+    messages: [MessageSchema],
+    // messages: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Message',
+    // }],
 });
 
-const UserModel = (mongoose.models.User as mongoose.Model<User>) ||
+// const UserModel = (mongoose.models.User as mongoose.Model<User>) ||
+//     mongoose.model<User>('User', UserSchema);
+//
+// export {UserModel, MessageModel};
+
+const UserModel =
+    (mongoose.models.User as mongoose.Model<User>) ||
     mongoose.model<User>('User', UserSchema);
 
-export {UserModel, MessageModel};
+export default UserModel;
