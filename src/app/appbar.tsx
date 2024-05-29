@@ -1,4 +1,5 @@
 import {auth, signIn, signOut} from "auth";
+import Link from "next/link";
 
 export default async function AppBar() {
 
@@ -7,6 +8,13 @@ export default async function AppBar() {
 
     return <>
         <div className='p-2 bg-gradient-to-b from-slate-800 to-slate-600 flex gap-2 text-white'>
+
+            <div className='flex gap-4'>
+                <Link href={'/'}>Home</Link>
+                <Link href={'/clientPage'}>Client Page</Link>
+                <Link href={'/serverPage'}>Server Page</Link>
+                <Link href={'/middlewareProtectedPage'}>Middleware Protected Page</Link>
+            </div>
             <div className='ml-auto'>
                 {
                     session && session.user ? (
